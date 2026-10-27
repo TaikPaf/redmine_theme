@@ -612,6 +612,32 @@ body.gf-compact nav.top-menu { padding-block: 2px; }
   #header { border-radius: var(--gf-radius-md); padding-inline: 14px; }
   #content { border-radius: var(--gf-radius-md); padding: 16px; }
   #sidebar { position: static; max-block-size: none; }
+  /* Redmine's responsive.css loads after the theme, hence the extra specificity. */
+  html body #header {
+    inset-block-start: 8px;
+    inset-inline: 8px;
+    inline-size: auto;
+    block-size: 56px;
+    padding: 0;
+    border-radius: var(--gf-radius-md);
+    background: var(--gf-glass-strong);
+  }
+  html body #project-jump.drdn { block-size: 56px; padding-block: 4px; padding-inline: 12px 64px; }
+  html body #project-jump .drdn-trigger {
+    color: var(--gf-text);
+    font-size: 1.0625rem;
+    block-size: 48px;
+    line-height: 48px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  html body #header a.mobile-toggle-button {
+    block-size: 56px;
+    line-height: 56px;
+    color: var(--gf-text);
+    border-inline-start-color: var(--gf-line);
+  }
   .flyout-menu { background: var(--gf-glass-strong); -webkit-backdrop-filter: var(--gf-blur); backdrop-filter: var(--gf-blur); }
   .flyout-menu a { color: var(--gf-text); }
   table.list { display: block; overflow-x: auto; }
