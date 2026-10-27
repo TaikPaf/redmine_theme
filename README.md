@@ -34,6 +34,6 @@ node src/build-icons.mjs package/icons
 
 ## Licences
 
-- Thème : GPL v2 ou ultérieure, comme Redmine.
+- Thème : GPL v2 ou ultérieure, comme Redmine (fichier `LICENSE`).
 - Police Inter : SIL Open Font License 1.1 (`fonts/LICENSE-Inter.txt`).
 - Icônes Lucide : licence ISC (`images/LICENSE-Lucide.txt`).
