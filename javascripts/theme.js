@@ -142,8 +142,29 @@
     }, {passive: true});
   }
 
+  // Drop the "Updated by" lead-in so journal headers read "Name · time".
+  function trimJournalHeaders(root) {
+    root.querySelectorAll('.journal-info a.user').forEach(function (user) {
+      var node = user.previousSibling;
+      while (node) {
+        var previous = node.previousSibling;
+        if (node.nodeType === 3) { node.remove(); }
+        node = previous;
+      }
+    });
+  }
+
+  function watchJournals() {
+    var history = document.getElementById('history');
+    if (!history) { return; }
+    trimJournalHeaders(history);
+    new MutationObserver(function () { trimJournalHeaders(history); })
+      .observe(history, {childList: true, subtree: true});
+  }
+
   document.addEventListener('DOMContentLoaded', function () {
     addToggles();
     watchScroll();
+    watchJournals();
   });
 })();

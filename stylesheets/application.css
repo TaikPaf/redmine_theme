@@ -544,17 +544,108 @@ p.nodata { color: var(--gf-muted); }
 
 /* ---------- Journals ---------- */
 
-#history .journal, div.journal { padding-block: 4px; }
-#history .journal.has-notes .wiki, div.journal .wiki {
-  background: transparent;
-  border: 1px solid var(--gf-line);
-  border-radius: var(--gf-radius);
-  padding: 10px 14px;
-  max-inline-size: 72ch;
+div.journal { padding-block: 4px; }
+div.journal h4 { border: 0; color: var(--gf-muted); font-weight: 400; }
+
+#history .tab-content { position: relative; max-inline-size: 760px; }
+#history .tab-content::before {
+  content: "";
+  position: absolute;
+  inset-block: 8px 0;
+  inset-inline-start: 11px;
+  border-inline-start: 2px solid var(--gf-line);
 }
-#history h4, div.journal h4 { border: 0; color: var(--gf-muted); font-weight: 400; }
-#history .journal-link { color: var(--gf-faint); }
-#history .journal ul.details { color: var(--gf-muted); }
+#history .journal { position: relative; margin: 0; padding: 0 0 16px; background: none; }
+#history .journal > .note { position: relative; padding-inline-start: 40px; }
+#history .journal h4.journal-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-block-size: 24px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--gf-faint);
+  font-size: 0.8125rem;
+  font-weight: 400;
+}
+#history .journal-info { flex: 1; min-inline-size: 0; }
+#history .journal-info .avatar {
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline-start: 0;
+  margin: 0;
+  box-shadow: 0 0 0 4px var(--gf-surface);
+}
+#history .journal-info a.user { color: var(--gf-text); font-weight: 600; }
+#history .journal-info a:not(.user) { color: inherit; }
+#history .journal-info a:hover { text-decoration: underline; }
+#history .journal-meta { display: flex; align-items: center; gap: 4px; flex: none; }
+#history .journal-link { color: var(--gf-faint); font-size: 0.75rem; }
+#history .journal-actions { display: inline-flex; align-items: center; gap: 2px; opacity: 0; transition: opacity 0.12s; }
+#history .journal:hover .journal-actions,
+#history .journal:focus-within .journal-actions,
+#history .journal-actions:has(.reacted, .drdn.expanded) { opacity: 1; }
+#history .journal-actions .icon-label { display: none; }
+#history .journal-actions > a, #history .journal-actions .drdn-trigger > span, #history .reaction-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-inline-size: 26px;
+  block-size: 26px;
+  padding: 0 4px;
+  border-radius: var(--gf-radius-sm);
+  color: var(--gf-muted);
+}
+#history .journal-actions > a:hover, #history .journal-actions .drdn-trigger > span:hover, #history .reaction-button:hover {
+  background: var(--gf-hover);
+  color: var(--gf-text);
+}
+
+#history .journal.has-notes h4.journal-header {
+  padding: 6px 8px 6px 12px;
+  border: 1px solid var(--gf-line);
+  border-block-end: 0;
+  border-start-start-radius: var(--gf-radius);
+  border-start-end-radius: var(--gf-radius);
+  background: var(--gf-bg);
+}
+#history .journal.has-notes .journal-info .avatar { inset-block-start: 7px; }
+#history .journal:not(.has-notes) { padding-block-end: 12px; }
+#history .journal:not(.has-notes) .journal-info .avatar {
+  inset-block-start: 2px;
+  inset-inline-start: 2px;
+  inline-size: 20px;
+  block-size: 20px;
+  font-size: 0.5625rem;
+  line-height: 20px;
+}
+#history .journal.has-notes .journal-content {
+  padding: 12px 14px;
+  border: 1px solid var(--gf-line);
+  border-end-start-radius: var(--gf-radius);
+  border-end-end-radius: var(--gf-radius);
+  background: var(--gf-surface);
+}
+#history .journal.has-notes .wiki { margin: 0; padding: 0; border: 0; background: none; color: var(--gf-text); }
+#history .journal.has-notes .wiki > :first-child { margin-block-start: 0; }
+#history .journal.has-notes .wiki > :last-child { margin-block-end: 0; }
+#history .journal.private-notes .journal-content { border-inline-start: 3px solid var(--gf-warning); }
+
+#history .journal:not(.has-notes) .journal-content { padding: 0; }
+#history ul.journal-details, #history .journal ul.details {
+  margin: 2px 0 0;
+  padding: 0;
+  list-style: none;
+  color: var(--gf-muted);
+  font-size: 0.8125rem;
+}
+#history .journal.has-notes ul.journal-details { margin: 0 0 10px; padding-block-end: 10px; border-block-end: 1px solid var(--gf-line); }
+#history ul.journal-details li { padding-block: 1px; }
+#history ul.journal-details strong { color: var(--gf-text); font-weight: 500; }
+#history ul.journal-details i { font-style: normal; color: var(--gf-text); }
+#history ul.journal-details del i { color: var(--gf-faint); }
 
 /* ---------- Popups ---------- */
 
