@@ -263,26 +263,80 @@ body:not(.has-main-menu) #header { padding-block-end: 14px; }
 #main-menu .menu-children li a:hover { color: var(--gf-text); background-color: var(--gf-hover); }
 
 #main { background: var(--gf-surface); align-items: flex-start; }
+/* Redmine's sidebar: a quiet panel on the app background, like the left navigation. */
 #sidebar {
-  background: transparent;
+  position: relative;
+  background: var(--gf-bg);
   border-inline-start: 1px solid var(--gf-line);
-  padding-block: 20px;
-  padding-inline: 16px;
+  padding-block: 14px 24px;
+  padding-inline: 12px;
   color: var(--gf-text);
+  font-size: 0.8125rem;
   align-self: stretch;
   box-sizing: border-box;
 }
+@media screen and (min-width: 900px) {
+  #main:not(.collapsedsidebar) #sidebar { inline-size: 260px; }
+}
 #sidebar-wrapper { position: sticky; inset-block-start: 16px; }
-#main.collapsedsidebar #sidebar { padding: 0; border: 0; }
-#sidebar h3 { color: var(--gf-faint); font-size: 0.6875rem; text-transform: uppercase; letter-spacing: 0.04em; font-weight: 600; }
-#sidebar ul li { padding-block: 3px; }
-#sidebar a.selected {
+#sidebar-switch-panel {
+  position: absolute;
+  inset-block-start: 10px;
+  inset-inline-end: 8px;
+  z-index: 1;
+  margin: 0;
+  padding: 0;
+  inline-size: auto;
+}
+#sidebar-switch-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  inline-size: 28px;
+  block-size: 28px;
+  padding: 0;
+  border-radius: var(--gf-radius-sm);
+}
+#sidebar-switch-button svg { stroke: var(--gf-faint); inline-size: 16px; block-size: 16px; }
+#sidebar-switch-button:hover { background-color: var(--gf-hover); }
+#sidebar-switch-button:hover svg { stroke: var(--gf-text); }
+#main.collapsedsidebar #sidebar { inline-size: 44px; padding: 0; border-inline-start: 1px solid var(--gf-line); }
+#main.collapsedsidebar #sidebar-switch-panel { inset-inline-end: 8px; }
+
+#sidebar h3, .gf-issue-sidebar h3 {
+  margin-block: 14px 4px;
+  margin-inline: 8px 36px;
+  color: var(--gf-faint);
+  font-size: 0.6875rem;
+  line-height: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  font-weight: 600;
+}
+#sidebar h3:first-child { margin-block-start: 6px; }
+#sidebar h4 { margin: 14px 8px 4px; padding: 0; border: 0; font-size: 0.8125rem; font-weight: 600; color: var(--gf-text); }
+#sidebar-wrapper > p, #sidebar-wrapper > div > p, #sidebar-wrapper > form { margin-inline: 8px; }
+#sidebar-wrapper ul, .gf-issue-sidebar ul { list-style: none; margin: 0; padding: 0; }
+#sidebar-wrapper ul li, .gf-issue-sidebar ul li { padding: 0; }
+#sidebar-wrapper ul li > a, .gf-issue-sidebar ul li > a {
+  display: block;
+  padding: 5px 8px;
+  border-radius: var(--gf-radius-sm);
+  color: var(--gf-muted);
+  text-decoration: none;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+#sidebar-wrapper ul li > a:hover, .gf-issue-sidebar ul li > a:hover { background: var(--gf-hover); color: var(--gf-text); }
+#sidebar a.selected, #sidebar-wrapper ul li > a.selected {
   background-color: var(--gf-selected);
   color: var(--gf-text);
+  font-weight: 500;
   border-radius: var(--gf-radius-sm);
 }
 #sidebar a.selected svg.icon-svg { stroke: var(--gf-text) !important; }
-#sidebar hr { background: var(--gf-line); }
+#sidebar hr { background: var(--gf-line); margin-block: 12px; }
 
 #content {
   background: transparent;
