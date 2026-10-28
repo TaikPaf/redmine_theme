@@ -1,15 +1,16 @@
 # Glassfluid, thème pour Redmine 7
 
-Thème moderne pour Redmine 7 : panneaux en verre dépoli, police Inter, icônes Lucide, mode clair et sombre.
+Thème sobre et lisible pour Redmine 7 : interface plate aux tons neutres, police Inter, icônes Lucide, mode clair et sombre.
 
 ## Fonctionnalités
 
-- Mise en page en panneaux translucides (menu, en-tête, contenu, barre latérale) sur un fond coloré flou.
-- **Mode sombre** : il suit le réglage du système, et un bouton (soleil / lune) dans la barre du haut permet de le forcer. Le choix est mémorisé dans le navigateur.
+- Interface plate : fond gris chaud, contenu sur surface blanche, bordures fines, une seule couleur d'accent. Les ombres sont réservées aux menus et fenêtres qui flottent.
+- Onglets du projet soulignés, sélection des lignes discrète et focus clavier visible.
+- **Mode sombre** : il suit le réglage du système, et un bouton (soleil / lune) permet de le forcer. Le choix est mémorisé dans le navigateur.
 - Jeu d'icônes **Lucide** à la place des icônes de Redmine (116 icônes). Les icônes non couvertes gardent leur version d'origine.
 - Police **Inter**, embarquée dans le thème : aucun appel vers Google Fonts.
 - Tableaux, formulaires, onglets, menus contextuels, boîtes de dialogue et messages restylés.
-- Barre du haut et barre latérale qui restent visibles au défilement, affichage adapté au mobile.
+- Barre du haut qui reste visible au défilement, affichage adapté au mobile.
 - Compatible avec le plugin [redmine_kanban](https://github.com/TaikPaf/redmine_kanban), qui reprend les couleurs du thème.
 
 ## Installation
