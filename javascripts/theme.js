@@ -29,8 +29,19 @@
     return media && media.matches ? 'dark' : 'light';
   }
 
+  var DENSITY_KEY = 'glassfluid:density';
+
+  function storedDensity() {
+    try {
+      return window.localStorage.getItem(DENSITY_KEY) === 'compact' ? 'compact' : 'comfortable';
+    } catch (e) {
+      return 'comfortable';
+    }
+  }
+
   function apply() {
     root.setAttribute('data-gf-theme', effectiveTheme());
+    root.setAttribute('data-gf-density', storedDensity());
   }
 
   // Runs in <head> so the page never flashes in the wrong theme.
@@ -43,9 +54,13 @@
     dark: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>',
     light: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>'
   };
+  var DENSITY_ICONS = {
+    comfortable: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg>',
+    compact: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 5h16M4 9.5h16M4 14h16M4 18.5h16"/></svg>'
+  };
   var LABELS = {
-    fr: {toDark: 'Passer en mode sombre', toLight: 'Passer en mode clair'},
-    en: {toDark: 'Switch to dark mode', toLight: 'Switch to light mode'}
+    fr: {toDark: 'Passer en mode sombre', toLight: 'Passer en mode clair', toCompact: 'Affichage compact', toComfortable: 'Affichage confortable'},
+    en: {toDark: 'Switch to dark mode', toLight: 'Switch to light mode', toCompact: 'Compact display', toComfortable: 'Comfortable display'}
   };
 
   function labels() {
@@ -54,6 +69,7 @@
   }
 
   var toggles = [];
+  var densityToggles = [];
 
   function updateToggle() {
     var dark = effectiveTheme() === 'dark';
@@ -63,6 +79,23 @@
       toggle.setAttribute('aria-label', label);
       toggle.setAttribute('title', label);
     });
+    // The icon shows the density the button switches to.
+    var compact = storedDensity() === 'compact';
+    var densityLabel = compact ? labels().toComfortable : labels().toCompact;
+    densityToggles.forEach(function (toggle) {
+      toggle.innerHTML = compact ? DENSITY_ICONS.comfortable : DENSITY_ICONS.compact;
+      toggle.setAttribute('aria-label', densityLabel);
+      toggle.setAttribute('title', densityLabel);
+      toggle.setAttribute('aria-pressed', compact ? 'true' : 'false');
+    });
+  }
+
+  function onDensityToggle() {
+    try {
+      window.localStorage.setItem(DENSITY_KEY, storedDensity() === 'compact' ? 'comfortable' : 'compact');
+    } catch (e) { /* storage unavailable */ }
+    apply();
+    updateToggle();
   }
 
   function onToggle() {
@@ -81,12 +114,18 @@
     ];
     containers.forEach(function (container) {
       if (!container) { return; }
+      var density = document.createElement('button');
+      density.type = 'button';
+      density.className = 'gf-theme-toggle gf-density-toggle';
+      density.addEventListener('click', onDensityToggle);
       var toggle = document.createElement('button');
       toggle.type = 'button';
       toggle.className = 'gf-theme-toggle';
       toggle.addEventListener('click', onToggle);
       container.insertBefore(toggle, container.firstChild);
+      container.insertBefore(density, toggle);
       toggles.push(toggle);
+      densityToggles.push(density);
     });
     updateToggle();
   }

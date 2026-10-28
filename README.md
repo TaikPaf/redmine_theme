@@ -7,6 +7,8 @@ Thème sobre et lisible pour Redmine 7 : interface plate aux tons neutres, polic
 - Interface plate : fond gris chaud, contenu sur surface blanche, bordures fines, une seule couleur d'accent. Les ombres sont réservées aux menus et fenêtres qui flottent.
 - Onglets du projet soulignés, sélection des lignes discrète et focus clavier visible.
 - **Mode sombre** : il suit le réglage du système, et un bouton (soleil / lune) permet de le forcer. Le choix est mémorisé dans le navigateur.
+- **Densité** confortable ou compacte : un bouton à côté de celui du mode sombre resserre les lignes des listes (et celles du plugin Kanban). Le choix est mémorisé dans le navigateur.
+- Sur téléphone, les listes de demandes s'affichent en cartes : numéro, statut, priorité et autres colonnes sur une ligne, le sujet en entier en dessous.
 - Jeu d'icônes **Lucide** à la place des icônes de Redmine (116 icônes). Les icônes non couvertes gardent leur version d'origine.
 - Police **Inter**, embarquée dans le thème : aucun appel vers Google Fonts.
 - Tableaux, formulaires, onglets, menus contextuels, boîtes de dialogue et messages restylés.

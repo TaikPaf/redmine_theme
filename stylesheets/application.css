@@ -591,6 +591,13 @@ img.gravatar, .avatar { border-radius: 50%; }
 .gf-theme-toggle:hover { background: var(--gf-hover) !important; color: var(--gf-text); }
 .gf-theme-toggle svg { inline-size: 16px; block-size: 16px; }
 
+/* ---------- Compact density ---------- */
+
+html[data-gf-density="compact"] table.list td { padding-block: 4px; }
+html[data-gf-density="compact"] table.list th { padding-block: 5px; }
+html[data-gf-density="compact"] #content { padding-block-start: 14px; }
+html[data-gf-density="compact"] div.issue .attributes .attribute { min-block-size: 0; }
+
 @media (prefers-reduced-motion: reduce) {
   * { transition: none !important; animation: none !important; }
 }
@@ -631,4 +638,44 @@ img.gravatar, .avatar { border-radius: 50%; }
   .flyout-menu { background: var(--gf-surface-raised); }
   .flyout-menu a { color: var(--gf-text); }
   table.list { display: block; overflow-x: auto; }
+}
+
+/* Phones: each issue row becomes a card, the subject on its own line under the other columns. */
+@media screen and (max-width: 699px) {
+  table.list.issues { display: block; overflow: visible; border: 0; background: transparent; }
+  table.list.issues thead { display: none; }
+  table.list.issues tbody { display: flex; flex-direction: column; gap: 8px; }
+  table.list.issues tr.issue {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 4px 12px;
+    padding: 10px 12px;
+    border: 1px solid var(--gf-line);
+    border-radius: var(--gf-radius);
+    background: var(--gf-surface);
+  }
+  table.list.issues tr.issue td {
+    display: inline-flex;
+    align-items: center;
+    padding: 0;
+    border: 0;
+    inline-size: auto;
+    max-inline-size: none;
+    text-align: start;
+    white-space: nowrap;
+    font-size: 0.8125rem;
+    color: var(--gf-muted);
+  }
+  table.list.issues tr.issue td:empty { display: none; }
+  table.list.issues tr.issue td.subject {
+    order: 10;
+    flex-basis: 100%;
+    white-space: normal;
+    font-size: 0.9375rem;
+    color: var(--gf-text);
+  }
+  table.list.issues tr.issue td.buttons { margin-inline-start: auto; order: 5; }
+  table.list.issues tr.issue td.checkbox input { margin: 0; }
+  table.list.issues tr.group, table.list.issues tr.issue.idnt td.subject { padding-inline-start: 0; }
 }
