@@ -612,7 +612,7 @@ img.gravatar, .avatar { border-radius: 50%; }
     border-block-end: 1px solid var(--gf-line);
     background: var(--gf-surface);
   }
-  html body #project-jump.drdn { block-size: 56px; padding-block: 4px; padding-inline: 12px 64px; }
+  html body #project-jump.drdn { block-size: 56px; padding-block: 4px; padding-inline: 64px 12px; box-sizing: border-box; }
   html body #project-jump .drdn-trigger {
     color: var(--gf-text);
     font-size: 1.0625rem;
