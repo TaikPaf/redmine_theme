@@ -24,9 +24,10 @@
 :root {
   --fonts-main: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
   --gf-bg: #EDF1F7;
-  --gf-blob-a: rgba(96, 140, 255, 0.42);
-  --gf-blob-b: rgba(64, 200, 180, 0.32);
-  --gf-glass: rgba(255, 255, 255, 0.62);
+  --gf-blob-a: rgba(96, 140, 255, 0.62);
+  --gf-blob-b: rgba(64, 200, 180, 0.52);
+  --gf-blob-c: rgba(168, 120, 255, 0.30);
+  --gf-glass: rgba(255, 255, 255, 0.55);
   --gf-glass-strong: rgba(255, 255, 255, 0.86);
   --gf-surface: rgba(255, 255, 255, 0.55);
   --gf-border: rgba(255, 255, 255, 0.8);
@@ -62,9 +63,10 @@
 
 html[data-gf-theme="dark"] {
   --gf-bg: #0B1020;
-  --gf-blob-a: rgba(80, 100, 255, 0.34);
-  --gf-blob-b: rgba(20, 170, 150, 0.22);
-  --gf-glass: rgba(26, 33, 54, 0.62);
+  --gf-blob-a: rgba(80, 100, 255, 0.55);
+  --gf-blob-b: rgba(20, 170, 150, 0.40);
+  --gf-blob-c: rgba(150, 90, 255, 0.28);
+  --gf-glass: rgba(26, 33, 54, 0.52);
   --gf-glass-strong: rgba(30, 38, 62, 0.92);
   --gf-surface: rgba(255, 255, 255, 0.04);
   --gf-border: rgba(255, 255, 255, 0.09);
@@ -168,6 +170,19 @@ body::after {
   background: var(--gf-blob-b);
   filter: blur(120px);
 }
+html::before {
+  content: "";
+  position: fixed;
+  z-index: -1;
+  inline-size: 40vmax;
+  block-size: 40vmax;
+  inset-inline-end: 10vmax;
+  inset-block-start: -14vmax;
+  border-radius: 50%;
+  background: var(--gf-blob-c);
+  filter: blur(120px);
+  pointer-events: none;
+}
 
 #wrapper {
   background: transparent;
@@ -223,13 +238,21 @@ nav.top-menu {
 #header {
   border-radius: var(--gf-radius);
   color: var(--gf-text);
-  padding-block: 14px;
-  padding-inline: 22px;
+  padding-block: 10px;
+  padding-inline: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  column-gap: 20px;
+  row-gap: 6px;
 }
 body.has-main-menu #header { padding-block-end: 10px; }
+#header > h1 { order: 1; min-block-size: 0; }
+#header > #main-menu { order: 2; flex: 1 1 auto; min-inline-size: 0; }
+#header > #quick-search { order: 3; margin-inline-start: auto; }
 #header a { color: var(--gf-text); }
 #header a:hover { color: var(--gf-accent); }
-#header h1 { font-weight: 700; letter-spacing: -0.02em; font-size: 1.5rem; }
+#header h1 { font-weight: 700; letter-spacing: -0.02em; font-size: 1.25rem; }
 #header h1 .breadcrumbs { color: var(--gf-muted); font-size: 0.8125rem; font-weight: 500; letter-spacing: 0; }
 #header h1 .breadcrumbs a { color: var(--gf-muted); }
 
@@ -245,7 +268,7 @@ body.has-main-menu #header { padding-block-end: 10px; }
   position: static;
   background: transparent;
   padding-inline: 0;
-  margin-block-start: 12px;
+  margin-block-start: 0;
 }
 #main-menu ul { gap: 4px; min-block-size: 0; flex-wrap: wrap; white-space: normal; }
 #main-menu li a {

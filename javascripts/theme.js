@@ -53,31 +53,41 @@
     return LABELS[lang] || LABELS.en;
   }
 
-  var toggle;
+  var toggles = [];
 
   function updateToggle() {
-    if (!toggle) { return; }
     var dark = effectiveTheme() === 'dark';
     var label = dark ? labels().toLight : labels().toDark;
-    toggle.innerHTML = dark ? ICONS.light : ICONS.dark;
-    toggle.setAttribute('aria-label', label);
-    toggle.setAttribute('title', label);
+    toggles.forEach(function (toggle) {
+      toggle.innerHTML = dark ? ICONS.light : ICONS.dark;
+      toggle.setAttribute('aria-label', label);
+      toggle.setAttribute('title', label);
+    });
   }
 
-  function addToggle() {
-    var container = document.querySelector('nav.top-menu .profile-menu') || document.querySelector('nav.top-menu');
-    if (!container) { return; }
-    toggle = document.createElement('button');
-    toggle.type = 'button';
-    toggle.className = 'gf-theme-toggle';
-    toggle.addEventListener('click', function () {
-      var next = effectiveTheme() === 'dark' ? 'light' : 'dark';
-      storeChoice(next === (media && media.matches ? 'dark' : 'light') ? null : next);
-      if (storedChoice() === null && next !== effectiveTheme()) { storeChoice(next); }
-      apply();
-      updateToggle();
+  function onToggle() {
+    var next = effectiveTheme() === 'dark' ? 'light' : 'dark';
+    storeChoice(next === (media && media.matches ? 'dark' : 'light') ? null : next);
+    if (storedChoice() === null && next !== effectiveTheme()) { storeChoice(next); }
+    apply();
+    updateToggle();
+  }
+
+  // One toggle in the side navigation when a plugin provides it, one in the top bar for small screens.
+  function addToggles() {
+    var containers = [
+      document.querySelector('.gf-theme-toggle-slot'),
+      document.querySelector('nav.top-menu .profile-menu') || document.querySelector('nav.top-menu')
+    ];
+    containers.forEach(function (container) {
+      if (!container) { return; }
+      var toggle = document.createElement('button');
+      toggle.type = 'button';
+      toggle.className = 'gf-theme-toggle';
+      toggle.addEventListener('click', onToggle);
+      container.insertBefore(toggle, container.firstChild);
+      toggles.push(toggle);
     });
-    container.insertBefore(toggle, container.firstChild);
     updateToggle();
   }
 
@@ -94,7 +104,7 @@
   }
 
   document.addEventListener('DOMContentLoaded', function () {
-    addToggle();
+    addToggles();
     watchScroll();
   });
 })();
